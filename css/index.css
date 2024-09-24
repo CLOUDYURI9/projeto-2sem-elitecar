@@ -9,7 +9,6 @@
 * {
     margin: 0;
     padding: 0;
-
     font-family: "Karla", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -34,30 +33,33 @@ h1 {
     flex-direction: row;
     justify-content: space-around;
     height: 6rem;
+    height: 100%;
 }
 
-.esquerda, 
-.meio, 
+.esquerda,  
 .direita {
-    width: 33%;
-
+    max-width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100vh;
 }
 
-.esquerda div {
+
+.direita{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 30px;
+    max-height: 100vh;
+    max-width: 100vh;
+}
+
+.esquerda{
     justify-content: center;
-
-    background-color: var(--cor-primaria);
-    color: white;
-
-    height: 50%;
-    width: 30%;
-
-    border-radius: 5px;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 20px;
 }
 
 div a {
@@ -79,3 +81,33 @@ header {
     width: 100%;
     background-color: blue ;
 }
+
+.carro{
+    width: 500px;
+    height: 200px;
+}
+
+.texto-inicial{
+    display: flex;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.texto-central{
+    margin-top: 20px;
+    margin-left: -50px;
+}
+
+.texto-final{
+    margin-left: 110px;
+}
+
+.img-esquerda{
+    margin-left: 50px;
+}
+
+.esquerda img{
+    width: 300px;
+    height: 80px;
+}
+
