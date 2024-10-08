@@ -61,21 +61,10 @@ h1 {
 }
 
 div a {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
 .meio h1 {
     margin: 0;
-}
-
-header {
-
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    background-color: blue ;
 }
