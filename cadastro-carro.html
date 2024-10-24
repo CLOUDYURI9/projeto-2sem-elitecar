@@ -18,33 +18,35 @@
             <a href="lista-carros.html">CARROS</a>
             <a href="lista-pedido.html">PEDIDOS</a>
         </nav>
+        <script src="js/cadastro-carro.js" defer></script>
     </header>
     <h1>CADASTRO DE CARRO</h1>
     <div class="container-formulario">
-        <form action="">
-            <label for="nome">
+        <form action=""  method="post"  id="FormularioCadastro">
+            <label>
                 Nome
                 <br>
-                <input type="text" name="input-marca-carro" placeholder="Insira a marca do carro" required>
+                <input type="text" id="nome-carro" name="input-marca-carro" placeholder="Insira a marca do carro" required>
             </label>
-            <label for="modelo">
+            <label>
                 Modelo
                 <br>
-                <input type="text" name="input-modelo-carro" placeholder="insira o modelo do carro" required>
+                <input type="text" id="modelo"  name="input-modelo-carro" placeholder="insira o modelo do carro" required>
             </label>
-            <label for="ano-de-fabricação">
+            <label>
                 Ano de Fabricação
                 <br>
-                <input type="number" name="input-fabricacao-carro" placeholder="Insira o ano de fabricação" required>
+                <input type="number" id="ano-de-fabricacao"  name="input-fabricacao-carro" placeholder="Insira o ano de fabricação" required>
             </label>
-                <label for="cor">
+                <label>
                 Cor
                 <br>
-                <input type="text" name="input-cor-carro" placeholder="Insira a cor primaria do carro" required>
+                <input type="text" id="cor" name="input-cor-carro" placeholder="Insira a cor primaria do carro" required>
             </label>
 
-            <input type="button" value="CADASTRAR">
+            <input id="btnCadastrar" onclick="enviarDados()" type="button" value="CADASTRAR" >
         </form>
+        <script src="js/functionCarro.js"></script>
     </div>
 </body>
 
