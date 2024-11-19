@@ -1,73 +1,70 @@
 async function enviaFormulario() {
-    const carroDTO = {
-        "marca": document.querySelectorAll("input")[0].value,
-        "modelo": document.querySelectorAll("input")[1].value,
-        "ano": Number(document.querySelectorAll("input")[2].value),
-        "cor": document.querySelectorAll("input")[3].value
+    const clienteDTO = {
+        "nome": document.querySelectorAll("input")[0].value,
+        "cpf": document.querySelectorAll("input")[1].value,
+        "telefone": document.querySelectorAll("input")[2].value,
     }
 
     try {
-        const respostaServidor = await fetch("http://localhost:3333/novo/carro", {
+        const respostaServidor = await fetch("http://localhost:3333/novo/cliente", {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
             },
-            body: JSON.stringify(carroDTO)
+            body: JSON.stringify(clienteDTO)
         });
     
         if(!respostaServidor.ok) {
             throw new Error("Erro ao enviar os dados para o respostaServidor. Contate o administrador do sistema");
         }
     
-        alert("Carro cadastrado com sucesso!");
+        alert("Cliente cadastrado com sucesso!");
     } catch (error) {
         console.log(error);
         alert(`Erro ao se comunicar com o servidor. ${error}`);
     }
 }
 
-async function recuperarListaCarros() {
+async function recuperarListaClientes() {
     try {
-        const respostaServidor = await fetch("http://localhost:3333/lista/carros");
+        const respostaServidor = await fetch("http://localhost:3333/cliente");
 
         if(!respostaServidor.ok) {
             throw new Error('Erro ao comunicar com o servidor');
         }
 
-        const listaDeCarros = await respostaServidor.json();
-
-        criarTabelaCarros(listaDeCarros)
+        const listaDeClientes = await respostaServidor.json();
+        console.log(listaDeClientes)
+        criarTabelaClientes(listaDeClientes)
     } catch (error) {
         console.log('Erro ao comunicar com o servidor');
         console.log(error);
     }
 }
 
-async function criarTabelaCarros(carros) {
-    const tabela = document.getElementById('corpoCarro');
+async function criarTabelaClientes(clientes) {
+    const tabela = document.getElementById('corpoCliente');
 
-    carros.forEach(carro => {
+    clientes.forEach(cliente => {
         // Cria uma nova linha da tabela
         const linha = document.createElement('tr');
 
         // Cria e preenche cada célula da linha
         const id = document.createElement('td');
-        id.textContent = carro.idCarro; // Preenche com o ID do carro
+        id.textContent = cliente.idCliente; // Preenche com o ID do carro
         
 
-        const marca = document.createElement('td');
-        marca.textContent = carro.marca; // Preenche com a Marca do carro
+        const nome = document.createElement('td');
+        nome.textContent = cliente.nome; // Preenche com a Marca do carro
        
 
-        const modelo = document.createElement('td');
-        modelo.textContent = carro.modelo; // Preenche com o Modelo do carro
+        const cpf = document.createElement('td');
+        cpf.textContent = cliente.cpf; // Preenche com o Modelo do carro
         
-        const ano = document.createElement('td');
-        ano.textContent = carro.ano; // Preenche com o Ano do carro
+        const telefone = document.createElement('td');
+        telefone.textContent = cliente.telefone; // Preenche com o Ano do carro
        
 
-        const cor = document.createElement('td');
-        cor.textContent = carro.cor; // Preenche com a Cor do carro
         
 
         const tdAcoes = document.createElement('td');
@@ -77,18 +74,19 @@ async function criarTabelaCarros(carros) {
         
         
         const iconExcluir = document.createElement('img'); // Cria o elemento <img>
+        iconExcluir.addEventListener('click', () => excluirCliente(cliente.idCliente));
+        iconExcluir.id = 'excluir';
         iconExcluir.src = 'assets/icons/trash-fill.svg'; // Define o caminho da imagem
         iconExcluir.alt = 'Ícone de excluir'; // Texto alternativo para acessibilidade
-        iconExcluir.addEventListener('click', () => excluirCarro(carro.idCarro));
+       
         
 
 
         //chamando
         linha.appendChild(id);
-        linha.appendChild(marca);
-        linha.appendChild(modelo);
-        linha.appendChild(ano);
-        linha.appendChild(cor);
+        linha.appendChild(nome);
+        linha.appendChild(cpf);
+        linha.appendChild(telefone);
         tdAcoes.appendChild(iconAtualizar); // Adiciona o <img> dentro da célula <td>
         linha.appendChild(tdAcoes); // Adiciona a célula de imagem à linha
         tdAcoes.appendChild(iconExcluir); // Adiciona o <img> dentro da célula <td>
@@ -97,15 +95,15 @@ async function criarTabelaCarros(carros) {
         tabela.appendChild(linha);
         
     });
-    
-    async function excluirCarro(idCarro) {
-        const url = `http://localhost:3333/delete/carro/${idCarro}`;
+
+    async function excluirCliente(idCliente) {
+        const url = `http://localhost:3333/delete/cliente/${idCliente}`;
     
         try {
             const response = await fetch(url, { method: 'DELETE' });
     
             if (response.ok) {
-                alert('Carro removido com sucesso');
+                alert('Cliente removido com sucesso');
                 window.location.reload();
             } else {
                 const error = await response.json();
@@ -113,8 +111,9 @@ async function criarTabelaCarros(carros) {
             }
         } catch (error) {
             console.error('Erro na requisição:', error);
-            alert('Erro ao tentar excluir o carro.');
+            alert('Erro ao tentar excluir o cliente.');
         }
     }
     
+
 }
